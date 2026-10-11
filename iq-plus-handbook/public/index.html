@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>คู่มือครู IQ PLUS</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#1d1d1f;color:#fff;font-family:system-ui,sans-serif;height:100vh;display:flex;flex-direction:column}
+header{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+header h1{font-size:16px;margin:0}a.btn,button{background:#f5a623;color:#111;border:0;border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer;text-decoration:none;font-size:14px}
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:8px;min-height:0}
+main img{max-width:100%;max-height:100%;border-radius:6px;box-shadow:0 8px 30px #0008}
+footer{display:flex;align-items:center;justify-content:center;gap:14px;padding:12px}
+#n{min-width:70px;text-align:center}
+</style></head><body>
+<header><h1>คู่มือครู IQ PLUS</h1><a class="btn" href="IQ_PLUS_Teacher_Handbook.pdf" download>ดาวน์โหลด PDF</a></header>
+<main><img id="s" alt="slide"></main>
+<footer><button onclick="go(-1)">◀ ก่อนหน้า</button><span id="n"></span><button onclick="go(1)">ถัดไป ▶</button></footer>
+<script>
+const N=35;let i=1;const pad=x=>String(x).padStart(2,'0');
+function show(){document.getElementById('s').src='slides/s-'+pad(i)+'.jpg';document.getElementById('n').textContent=i+' / '+N;location.hash=i;
+ if(i<N){new Image().src='slides/s-'+pad(i+1)+'.jpg'}}
+function go(d){i=Math.min(N,Math.max(1,i+d));show()}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' ')go(1);if(e.key==='ArrowLeft')go(-1)});
+let x0=null;document.addEventListener('touchstart',e=>x0=e.touches[0].clientX);
+document.addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40)go(dx<0?1:-1);x0=null});
+const h=parseInt(location.hash.slice(1));if(h>=1&&h<=N)i=h;show();
+</script></body></html>
